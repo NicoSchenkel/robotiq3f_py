@@ -27,9 +27,12 @@ def main():
     gripper.command_gripper(rPRA=target_position, rSP=speed, rFR=force, rMOD=mode, rICF=individual_control)
 
     # Wait for the gripper to reach the target positions
-    while ([gripper.FingerA_Position, gripper.FingerB_Position, gripper.FingerC_Position] != target_position):
+    while any([gripper.FingerA_Current, gripper.FingerB_Current, gripper.FingerC_Current]):
         time.sleep(0.1)
-        print('get into position')
+        print(f'gripper.FingerA_Current{gripper.FingerA_Current}')
+        print(f'gripper.FingerB_Current{gripper.FingerB_Current}')
+        print(f'gripper.FingerC_Current{gripper.FingerC_Current}')
+    print('Position Reached')
     # # Output the current finger positions
     # print(f"FingerA_Position: {gripper.FingerA_Position} FingerB_Position: {gripper.FingerB_Position} FingerC_Position: {gripper.FingerC_Position}")
 
@@ -46,8 +49,10 @@ def main():
     gripper.command_gripper(rPRA=target_position, rSP=speed, rFR=force, rMOD=mode, rICF=individual_control)
 
     # Wait for the gripper to reach the new target positions
-    while ([gripper.FingerA_Position, gripper.FingerB_Position, gripper.FingerC_Position] != target_position):
+    while any([gripper.FingerA_Current, gripper.FingerB_Current, gripper.FingerC_Current]):
+        print("wait")
         time.sleep(0.1)
+        
         #print([gripper.FingerA_Position, gripper.FingerB_Position, gripper.FingerC_Position])
 
     # # Print the updated positions of the fingers
